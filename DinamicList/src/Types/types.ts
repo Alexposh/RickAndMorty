@@ -1,3 +1,4 @@
+// types used within the project whenever needed 
 export interface Character {
     id: string;
     name: string;

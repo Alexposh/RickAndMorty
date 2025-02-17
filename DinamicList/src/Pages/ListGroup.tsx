@@ -1,4 +1,3 @@
-// import { NavLink, Outlet } from "react-router-dom";
 import { useQuery, gql } from '@apollo/client'
 import { Character, CharactersData, CharactersVars } from "../Types/types";
 import { useEffect, useState } from 'react';
@@ -27,41 +26,30 @@ import ErrorPage from './ErrorPage';
 
 const ListGroup: React.FC = () => {   
     
-    const [name, setName] = useState('');
-    const [searchName, setSearchName] = useState('Morty');
+    const [name, setName] = useState('');  // defines the name that is searched and the setName function to update it
+    const [searchName, setSearchName] = useState('Morty'); // defines the name by which the search is made and the method to update it
     const { loading, error, data } = useQuery<CharactersData, CharactersVars>(GET_CHARACTERS, {
       variables: { page: 1, name: searchName },
-    });
-    const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
+    });   // the query that is being made to get the items to list
+
+    const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);  // defines the selected character that is shown in the "highlighted"  part and the method to update it
     
     useEffect(() => {
         if (data && data.characters.results.length > 0) {
           setSelectedCharacter(data.characters.results[0]);
         }
-      }, [data]);
+      }, [data]);  // this sets the initial item shown as the first item in the fetched list
     const handleCharacterClick = (character: Character) => {
       setSelectedCharacter(character);
-    };
+    }; // this is the method that is called when a character is clicked
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setSearchName(name);
-      };
+      }; // this is the method that is called when the search field content should be used for the search to populate the list   
 
-
-    // if (loading) return <p>Loading...</p>;
-    // if (error) return <p>Error</p>;
-  
-
-
-    // if (data){
-    //     console.log(data.characters.results[0]);
-    //     // selectedCharacter = data.characters.results[0];
-    //     console.log(selectedCharacter);
-
-    // }
-    
-
+      //below is the rendered part that contains a form, the list of characters and the selected character
+      // form works with the Submit of the button and by pressing "Enter" key
     return(
         <>
         <div style={{display:"flex"}}>

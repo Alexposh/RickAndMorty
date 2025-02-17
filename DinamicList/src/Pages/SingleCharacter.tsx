@@ -15,13 +15,12 @@ const GET_CHARACTER_BY_ID = gql`
 
 const SingleCharacter: React.FC<{ id: string }> = ({ id }) => {
 
-    // const idOfItem = useParams<{itemId:string}>().itemId;
-    const { loading, error, data } = useQuery<CharacterData, CharacterVars>(GET_CHARACTER_BY_ID, {
+  const { loading, error, data } = useQuery<CharacterData, CharacterVars>(GET_CHARACTER_BY_ID, {
       variables: { id },
     });
   
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error... </p>;
+    if (loading) return <p>Loading...</p>; // this is displayed while the data is being fetched
+    if (error) return <p>Error... </p>; // this is displayed if there is an error in fetching the data 
   
     return (
       <div style={{ width: "500px",display: "flex", flexDirection: "column", backgroundColor: "#4B7083", height: "100%", borderRadius: "5px", marginTop:"75px" }}>
