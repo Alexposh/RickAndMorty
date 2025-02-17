@@ -1,7 +1,7 @@
 // import { NavLink, Outlet } from "react-router-dom";
 import { useQuery, gql } from '@apollo/client'
 import { Character, CharactersData, CharactersVars } from "../Types/types";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SingleCharacter from './SingleCharacter';
 import ListItem from './ListItem';
 import ErrorPage from './ErrorPage';
@@ -32,8 +32,13 @@ const ListGroup: React.FC = () => {
     const { loading, error, data } = useQuery<CharactersData, CharactersVars>(GET_CHARACTERS, {
       variables: { page: 1, name: searchName },
     });
-    const [selectedCharacter, setSelectedCharacter] = useState(data ? data.characters.results[0] : null);
+    const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
     
+    useEffect(() => {
+        if (data && data.characters.results.length > 0) {
+          setSelectedCharacter(data.characters.results[0]);
+        }
+      }, [data]);
     const handleCharacterClick = (character: Character) => {
       setSelectedCharacter(character);
     };
