@@ -20,7 +20,7 @@ import ErrorPage from './ErrorPage';
 }
 `;
 
-const ListContainer: React.FC = () => {   
+const ListGroup: React.FC = () => {   
     
     const [name, setName] = useState('');  // defines the name that is searched and the setName function to update it
     const [searchName, setSearchName] = useState('Morty'); // defines the name by which the search is made and the method to update it
@@ -78,4 +78,4 @@ const ListContainer: React.FC = () => {
     </>
     )   
     }
-    export default ListContainer;
+    export default ListGroup;
