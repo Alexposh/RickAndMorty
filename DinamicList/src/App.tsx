@@ -2,6 +2,7 @@ import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ListGroup from './Pages/ListGroup';
 import ErrorPage from './Pages/ErrorPage';
+import Title from './Title';
 
 function App() {
 
@@ -19,9 +20,10 @@ function App() {
 
   return (
     <>
-      <h1>Technical Test for Frontend Developer</h1>
-      {/* Contains the destinations entered by the user by using the router, might not be used that much, can provide options if the app gets bigger */}
-      <RouterProvider router={router} />  
+      <Title/>
+      {/* RouterProvider contains the destinations entered by the user by using the router, might not be used that much, can provide options if the app gets bigger */}
+        <RouterProvider router={router} /> 
+     
 
     </>
   )

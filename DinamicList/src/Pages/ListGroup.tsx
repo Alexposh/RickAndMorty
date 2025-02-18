@@ -1,16 +1,14 @@
 import { useQuery, gql } from '@apollo/client'
 import { Character, CharactersData, CharactersVars } from "../Types/types";
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState} from 'react';
 import SingleCharacter from './SingleCharacter';
 import ListItem from './ListItem';
 import ErrorPage from './ErrorPage';
 
-    const GET_CHARACTERS = gql`
+  export const GET_CHARACTERS = gql`
  query Query($name: String) {
   characters(page: 2, filter: {name: $name}) {
-    info {
-      count
-    }
+    
     results {
       name
       id
@@ -18,9 +16,7 @@ import ErrorPage from './ErrorPage';
     }
   }
   
-  episodesByIds(ids: [1, 2, 3]) {
-    id
-  }
+  
 }
 `;
 
@@ -48,6 +44,7 @@ const ListGroup: React.FC = () => {
         setSearchName(name);
       }; // this is the method that is called when the search field content should be used for the search to populate the list   
 
+      
       //below is the rendered part that contains a form, the list of characters and the selected character
       // form works with the Submit of the button and by pressing "Enter" key
     return(
@@ -66,8 +63,9 @@ const ListGroup: React.FC = () => {
         <button type="submit">Search</button>
       </form>
       {loading && <h3>Loading...</h3>}
-      {error && <ErrorPage/>}
-           {data && data.characters.results.map(character => (
+      
+            {data && (data?.characters.results.length == 0) ? <h3>No  characters found. Empty search is better than wrong search 😀</h3> : null}
+            {data && data.characters.results.map(character => (
             <div key={character.id}                 
                 onClick={() => handleCharacterClick(character)}>  
                          
@@ -75,7 +73,7 @@ const ListGroup: React.FC = () => {
             </div>      
         ))} 
         </div>
-        {selectedCharacter && <SingleCharacter id={selectedCharacter.id}/>}
+        {error ? <ErrorPage /> : selectedCharacter && <SingleCharacter id={selectedCharacter.id}/>}
         </div>  
     </>
     )   
