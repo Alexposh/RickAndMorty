@@ -1,3 +1,3 @@
 export default function Title() {
-  return <h1>Rick and Morty</h1>;
+  return <h1>Rick and Morty Sample</h1>;
 }
